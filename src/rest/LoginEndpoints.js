@@ -62,7 +62,17 @@ export async function loginWithApiKey(apiKey) {
     const props = {
         apiKey,
     }
-    return getSessionToken(url, props)
+    try {
+        return await getSessionToken(url, props)
+    } catch (err) {
+        if (err && err.response && err.response.status === 404) {
+            // this 404s if running against new backend with username/password support removed
+            // wrap with appropriate error message
+            const message = 'apiKey auth is no longer supported. Please create an ethereum identity.'
+            throw new AuthFetchError(message, err.response, err.body)
+        }
+        throw err
+    }
 }
 
 export async function loginWithUsernamePassword(username, password) {

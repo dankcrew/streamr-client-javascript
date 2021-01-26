@@ -8,6 +8,7 @@ import authFetch from '../../../src/rest/authFetch'
 import StreamrClient from '../../../src'
 import * as Token from '../../../contracts/TestToken.json'
 import config from '../config'
+import { fakePrivateKey } from '../utils'
 
 const log = debug('StreamrClient::DataUnionEndpoints::integration-test')
 // const log = console.log
@@ -162,7 +163,7 @@ describe('DataUnionEndPoints', () => {
             const client = new StreamrClient({
                 ...config.clientOptions,
                 auth: {
-                    apiKey: 'tester1-api-key'
+                    privateKey: fakePrivateKey(),
                 },
                 dataUnion: dataUnion.address,
                 autoConnect: false,

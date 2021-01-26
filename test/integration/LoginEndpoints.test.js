@@ -3,6 +3,7 @@ import assert from 'assert'
 import { ethers } from 'ethers'
 
 import StreamrClient from '../../src'
+import { fakePrivateKey } from '../utils'
 
 import config from './config'
 
@@ -11,7 +12,9 @@ describe('LoginEndpoints', () => {
 
     const createClient = (opts = {}) => new StreamrClient({
         ...config.clientOptions,
-        apiKey: 'tester1-api-key',
+        auth: {
+            privateKey: fakePrivateKey(),
+        },
         autoConnect: false,
         autoDisconnect: false,
         ...opts,

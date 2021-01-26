@@ -61,7 +61,7 @@ describe('Session', () => {
             await expect(async () => (
                 clientSessionToken.session.loginFunction()
             )).rejects.toThrow(
-                'Need either "privateKey", "ethereum", "apiKey", "username"+"password" or "sessionToken" to login.'
+                'Need either "privateKey", "ethereum" or "sessionToken" to login.'
             )
         })
 
@@ -72,7 +72,7 @@ describe('Session', () => {
             clientNone.onError = () => {}
             await clientNone.session.loginFunction().catch((err) => {
                 expect(err.toString()).toEqual(
-                    'Error: Need either "privateKey", "ethereum", "apiKey", "username"+"password" or "sessionToken" to login.'
+                    'Error: Need either "privateKey", "ethereum" or "sessionToken" to login.'
                 )
             })
             clientNone.onError = () => {}
@@ -80,7 +80,7 @@ describe('Session', () => {
             await expect(async () => (
                 clientSessionToken.session.loginFunction()
             )).rejects.toThrow(
-                'Need either "privateKey", "ethereum", "apiKey", "username"+"password" or "sessionToken" to login.'
+                'Need either "privateKey", "ethereum" or "sessionToken" to login.'
             )
         })
     })
@@ -127,7 +127,7 @@ describe('Session', () => {
             beforeEach(() => {
                 session = new Session()
                 session.options.unauthenticated = false
-                msg = 'Error: Need either "privateKey", "ethereum", "apiKey" or "username"+"password" to login.'
+                msg = 'Error: Need either "privateKey", "ethereum" or "sessionToken" to login.'
                 session.loginFunction = sinon.stub().rejects(new Error(msg))
                 clientSessionToken.onError = () => {}
             })
